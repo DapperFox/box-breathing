@@ -82,9 +82,15 @@ export default function App() {
   )
 }
 
-const dimensions = {
-  lineLength: 400,
-  lineHeight: 10,
+function dimensions () {
+  let lineLength = 400
+  if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
+    lineLength = 300
+  }
+  return {
+    lineLength,
+    lineHeight: 10
+  }
 }
 
 const Main = styled.main`
@@ -103,8 +109,8 @@ const Line = styled.div`
 `
 
 const Line1 = styled(Line)`
-  width: ${dimensions.lineLength}px;
-  height: ${dimensions.lineHeight}px;
+  width: ${dimensions().lineLength}px;
+  height: ${dimensions().lineHeight}px;
 
   top: 0;
   left: 0;
@@ -112,23 +118,23 @@ const Line1 = styled(Line)`
 
 const Line2 = styled(Line)`
   top: 0;
-  left: ${dimensions.lineLength - dimensions.lineHeight}px;
-  height: ${dimensions.lineLength}px;
-  width: ${dimensions.lineHeight}px;
+  left: ${dimensions().lineLength - dimensions().lineHeight}px;
+  height: ${dimensions().lineLength}px;
+  width: ${dimensions().lineHeight}px;
 `
 
 const Line3 = styled(Line)`
   bottom: 0;
   left: 0;
-  width: ${dimensions.lineLength}px;
-  height: ${dimensions.lineHeight}px;
+  width: ${dimensions().lineLength}px;
+  height: ${dimensions().lineHeight}px;
 `
 
 const Line4 = styled(Line)`
-  top: ${`-${dimensions.lineLength + dimensions.lineHeight}px`};
+  top: ${`-${dimensions().lineLength + dimensions().lineHeight}px`};
   left: 0;
-  height: ${dimensions.lineLength}px;
-  width: ${dimensions.lineHeight}px;
+  height: ${dimensions().lineLength}px;
+  width: ${dimensions().lineHeight}px;
 `
 
 const LineLoad = styled.div`
@@ -145,9 +151,9 @@ const Line1Load = styled(LineLoad)`
   width: 0;
 
   ${(props) => props.loaded && css`
-    width: ${dimensions.lineLength}px;
+    width: ${dimensions().lineLength}px;
   `}
-  height: ${dimensions.lineHeight}px;
+  height: ${dimensions().lineHeight}px;
   top: 0;
   left: 0;
 `
@@ -156,21 +162,21 @@ const Line2Load = styled(LineLoad)`
   height: 0;
 
   ${(props) => props.loaded && css`
-    height: ${dimensions.lineLength}px;
+    height: ${dimensions().lineLength}px;
   `}
-  width: ${dimensions.lineHeight}px;
-  top: ${dimensions.lineHeight}px;
-  left: ${ dimensions.lineLength - dimensions.lineHeight}px;
+  width: ${dimensions().lineHeight}px;
+  top: ${dimensions().lineHeight}px;
+  left: ${ dimensions().lineLength - dimensions().lineHeight}px;
 `
 
 const Line3Load = styled(LineLoad)`
   width: 0;
 
   ${(props) => props.loaded && css`
-    width: ${dimensions.lineLength}px;
+    width: ${dimensions().lineLength}px;
   `}
-  height: ${dimensions.lineHeight}px;
-  top: ${dimensions.lineLength + dimensions.lineHeight}px;
+  height: ${dimensions().lineHeight}px;
+  top: ${dimensions().lineLength + dimensions().lineHeight}px;
   right: 0;
   direction: rtl;
 `
@@ -179,16 +185,16 @@ const Line4Load = styled(LineLoad)`
   height: 0;
 
   ${(props) => props.loaded && css`
-    height: ${dimensions.lineLength}px;
+    height: ${dimensions().lineLength}px;
   `}
-  width: ${dimensions.lineHeight}px;
-  bottom: -${dimensions.lineHeight}px;
+  width: ${dimensions().lineHeight}px;
+  bottom: -${dimensions().lineHeight}px;
   left: 0;
   direction: rtl;
 `
 
 const BoxContainer = styled.div`
-  width: ${dimensions.lineLength}px;
-  height: ${dimensions.lineLength}px;
+  width: ${dimensions().lineLength}px;
+  height: ${dimensions().lineLength}px;
   position: relative;
 `
